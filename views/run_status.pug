@@ -1,0 +1,50 @@
+extends layout
+
+block content
+  body
+    h1=title
+      
+    .container
+        table#pickle.table.table-hover.table-striped.table-bordered
+            thead
+                tr
+                    th Run number
+                    th raw_records
+                    th records
+                    th peaks
+                    th peak_basics
+                    th peak_positions
+                    th peak_classification
+                    th n_competing
+                    th event_basics
+                    th event_positions
+                    th event_info
+                    th events
+                    th corrected_areas
+                    th energy_estimates
+            tbody
+                each run, i in runs
+                  tr
+                    td(scope='row')= run.number
+                    td= run.has_raw_records
+                    td= run.has_records
+                    td= run.has_peaks
+                    td= run.has_peak_basics
+                    td= run.has_peak_positions
+                    td= run.has_peak_classification
+                    td= run.has_n_competing
+                    td= run.has_event_basics
+                    td= run.has_event_positions
+                    td= run.has_event_info
+                    td= run.has_events
+                    td= run.has_corrected_areas
+                    td= run.has_energy_estimates
+
+
+    script.
+      $(document).ready(function() {
+        $('#pickle').DataTable()
+        });
+
+
+    

@@ -1,0 +1,54 @@
+extends layout
+
+block content
+  h1=title
+
+  .container
+    table#pickle.table.table-hover.table-striped.table-bordered
+        thead
+                tr
+                        th Data type
+                        th Processed percentage
+        tbody
+                tr
+                        td(scope='row') raw_records
+                        td  #{docs[0].has_raw_records}
+                tr
+                        td(scope='row') records
+                        td  #{docs[0].has_records}
+                tr
+                        td(scope='row') peaks
+                        td  #{docs[0].has_peaks}
+                tr
+                        td(scope='row') peak_basics
+                        td  #{docs[0].has_peak_basics}
+                tr
+                        td(scope='row') peak_positions
+                        td  #{docs[0].has_peak_positions}
+                tr
+                        td(scope='row') peak_classification
+                        td  #{docs[0].has_peak_classification}
+                tr
+                        td(scope='row') n_competing
+                        td  #{docs[0].has_n_competing}
+                tr
+                        td(scope='row') event_basics
+                        td  #{docs[0].has_event_basics}
+                tr
+                        td(scope='row') event_positions
+                        td  #{docs[0].has_event_positions}
+                tr
+                        td(scope='row') event_info
+                        td  #{docs[0].has_event_info}
+                tr
+                        td(scope='row') events
+                        td  #{docs[0].has_events}
+                tr
+                        td(scope='row') corrected_areas
+                        td  #{docs[0].has_corrected_areas}
+                tr
+                        td(scope='row') energy_estimates
+                        td  #{docs[0].has_energy_estimates}
+   script.
+     $(document).ready(function() {
+       $('#pickle').DataTable({paging: false, "order": [[ 1, "desc" ]]})});

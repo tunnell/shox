@@ -1,0 +1,19 @@
+extends layout
+
+
+block content
+  h1= title
+  
+
+  #container
+
+  script(src='/javascripts/data_size.js')
+
+  script.
+    docs=!{docs};
+    console.log(docs);
+    $(document).ready(function() {
+     plot_datasize(docs);
+     });
+  
+    
