@@ -3,15 +3,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var configuration = require('./keys.json');
 
-// New Code
+// Mongo
 var mongo = require('mongodb');
 var monk = require('monk');
-mongo_pw = process.env.MONGO_PASSWORD
 
-var db=monk('mongodb://rundb-r:' + mongo_pw +'@rundbcluster-shard-00-00-cfaei.gcp.mongodb.net:27017,rundbcluster-shard-00-01-cfaei.gcp.mongodb.net:27017,rundbcluster-shard-00-02-cfaei.gcp.mongodb.net:27017/xenon1t?ssl=true&replicaSet=RunDBCluster-shard-0&authSource=admin&retryWrites=true')
+var mongo_url = "mongodb://" + configuration.mongoUsername + ":" + configuration.mongoPassword + "@" + configuration.mongoUrl
+var db=monk(mongo_url)
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -32,7 +32,6 @@ app.use(function(req,res,next){
     });
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
