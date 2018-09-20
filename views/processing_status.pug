@@ -49,6 +49,6 @@ block content
                 tr
                         td(scope='row') energy_estimates
                         td  #{docs[0].has_energy_estimates}
-   script.
-     $(document).ready(function() {
+    script.
+      $(document).ready(function() {
        $('#pickle').DataTable({paging: false, "order": [[ 1, "desc" ]]})});
