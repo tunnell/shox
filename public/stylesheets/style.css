@@ -120,6 +120,7 @@ table tr:hover td {
     width: calc(100% - 150px);
     height: calc(100vh - 41px);
     padding:5px;
+    min-width: 1000;
 }
 
 .sidebar {

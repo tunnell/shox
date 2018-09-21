@@ -137,7 +137,7 @@ router.get('/processing_status', function(req, res) {
                                           has_corrected_areas : {'$cond' : ['$has_corrected_areas', 1, 0]},
                                           has_energy_estimates : {'$cond' : ['$has_energy_estimates', 1, 0]},
 					  }},
-			      {$group : {_id : '',
+			      {$group : {_id : "",
                                           total : {$sum : 1},
                                           has_raw_records : {$sum : '$has_raw_records'},
                                           has_records : {$sum : '$has_records'},
@@ -153,29 +153,29 @@ router.get('/processing_status', function(req, res) {
                                           has_corrected_areas : {$sum : '$has_corrected_areas'},
                                           has_energy_estimates : {$sum : '$has_energy_estimates'},
 						  }},
-                              {$project : {
-                                      _id : 0,
-                                          number : 1,
-                                          has_raw_records : {$trunc: {$multiply : [100, {'$divide' : ['$has_raw_records', '$total']}]}},
-                                          has_records : {$trunc: {$multiply : [100, {'$divide' : ['$has_records', '$total']}]}},
-                                          has_peaks : {$trunc: {$multiply : [100, {'$divide' : ['$has_peaks', '$total']}]}},
-                                          has_peak_basics : {$trunc: {$multiply : [100, {'$divide' : ['$has_peak_basics', '$total']}]}},
-                                          has_peak_positions : {$trunc: {$multiply : [100, {'$divide' : ['$has_peak_positions', '$total']}]}},
-                                          has_peak_classification : {$trunc: {$multiply : [100, {'$divide' : ['$has_peak_classification', '$total']}]}},
-                                          has_n_competing : {$trunc: {$multiply : [100, {'$divide' : ['$has_n_competing', '$total']}]}},
-                                          has_event_basics : {$trunc: {$multiply : [100, {'$divide' : ['$has_event_basics', '$total']}]}},
-                                          has_event_positions : {$trunc: {$multiply : [100, {'$divide' : ['$has_event_positions', '$total']}]}},
-                                          has_event_info : {$trunc: {$multiply : [100, {'$divide' : ['$has_event_info', '$total']}]}},
-                                          has_events : {$trunc: {$multiply : [100, {'$divide' : ['$has_events', '$total']}]}},
-                                          has_corrected_areas : {$trunc: {$multiply : [100, {'$divide' : ['$has_corrected_areas', '$total']}]}},
-                                          has_energy_estimates : {$trunc: {$multiply : [100, {'$divide' : ['$has_energy_estimates', '$total']}]}}
-                                          }},
                               ],
 			{},
 				function(e,docs){
+                                    var plotting_docs = [];
+
+                                    var doc = docs[0];
+                                    console.log(docs);
+                                    for(var attributename in doc){
+                                        if(attributename == '_id') {
+                                            continue;
+                                        }
+                                        if(attributename == 'total') {  continue; }
+
+                                        plotting_docs.push({"name": attributename.slice(4),
+                                                    "y" : doc[attributename]/doc['total']*100})
+
+                                        
+                                    };
+                                    console.log(plotting_docs);
+
                 res.render('processing_status', {
 			"title" : "shox processing status",
-                        "docs" : docs,
+                            "docs" : JSON.stringify(plotting_docs)
                             });
             });
     });

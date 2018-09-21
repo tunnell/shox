@@ -5,7 +5,7 @@ block content
     h1=title
       
     .container
-        table#pickle.table.table-hover.table-striped.table-bordered
+        table#pickle.display
             thead
                 tr
                     th Run number
@@ -43,7 +43,12 @@ block content
 
     script.
       $(document).ready(function() {
-        $('#pickle').DataTable()
+        $('#pickle').DataTable( { dom: 'Bfrtip',
+             select: true,
+            buttons: [
+                    'copy', 'excel', 'pdf', 'selectAll', 'selectNone'
+                        ]}),
+                        
         });
 
 
