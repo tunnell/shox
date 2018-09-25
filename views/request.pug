@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+  p Use this for processing requests.
+
+  form#new_run_form(action="/request/process_query", method="post")
+    div.form-group
+      label.form-label(for="dtype") Data type : &nbsp;&nbsp;
+      div.form-check.form-check-inline
+        input.form-check-input#records(type="radio" name="dtype" value="records" checked)
+        label.form-check-label(for="records") Records
+      div.form-check.form-check-inline
+        input.form-check-input#event_basics(type="radio" name="dtype" value="event_basics")
+        label.form-check-label(for="event_basics") Event basics
+    div.form-group
+      label.form-label(for="query") Mongo JSON query
+      textarea.form-control#query(rows="3" name="query" type="text" required placeholder="{\"number\" : 8050}")
+    div.form-group
+      label.form-label(for="priority") Priority (normal processing at 1, user default 10, higher is more priority)
+      input.form-control#how_many(type="number" name="priority" value=10 min=0 max=99 required)
+    button.btn.btn-primary.btn-lg(type="submit") Submit request
