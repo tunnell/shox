@@ -23,7 +23,7 @@ block content
                     th corrected_areas
                     th energy_estimates
             tbody
-                each run, i in runs
+                each run, i in data
                   tr
                     td(scope='row')= run.number
                     td= run.has_raw_records
@@ -40,16 +40,8 @@ block content
                     td= run.has_corrected_areas
                     td= run.has_energy_estimates
 
+    script(src="/javascripts/run_status.js")
 
-    script.
-      $(document).ready(function() {
-        $('#pickle').DataTable( { dom: 'Bfrtip',
-             select: true,
-            buttons: [
-                    'copy', 'excel', 'pdf', 'selectAll', 'selectNone'
-                        ]}),
-                        
-        });
 
 
     

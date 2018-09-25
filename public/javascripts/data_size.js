@@ -1,5 +1,8 @@
 function plot_datasize(data) {
     Highcharts.chart('container', {
+        exporting: {
+            showTable: true
+        },
         credits: false,
         chart: {
             type: 'column'
@@ -39,7 +42,7 @@ function plot_datasize(data) {
         },
 
         "series": [{
-            "name": "Sites",
+            "name": "Data volume [GB]",
             "colorByPoint": true,
             "data": docs,
 

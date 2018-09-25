@@ -5,7 +5,7 @@ block content
     h1=title
       
     .container
-        table#pickle.table.table-hover.table-striped.table-bordered
+        table#pickle.display
             thead
                 tr
                     th Host
@@ -22,16 +22,7 @@ block content
                     td= run.run
                     td= run.runStart
 
-    script.
-      $(document).ready(function() {
-        $('#pickle').DataTable({"columnDefs": [
-            {
-                "render": function ( data, type, row ) {
-                    return moment(data).fromNow();
-                },
-                "targets": [1, 2, 4],
-            }
-        ]})
-        })
-
     
+    script(src='/javascripts/workers.js')
+
+

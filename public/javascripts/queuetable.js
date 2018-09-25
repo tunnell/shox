@@ -7,7 +7,8 @@ $(document).ready(function() {
             //paging: true,
             //lengthChange: true,
             order: [
-                [0, "desc"]
+                    [1, "desc"],
+                    [0, "desc"]
             ],
             iDisplayLength: 25,
             ajax: {

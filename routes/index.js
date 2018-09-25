@@ -1,10 +1,11 @@
-var express = require('express');
+var express = require('express'); 
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'shox: do we Still Have Our Xenon data?' });
 });
+
 
 router.get('/data_size', function(req, res) {
         var db = req.db;
@@ -90,7 +91,7 @@ router.get('/run_status', function(req, res) {
 			     function(e,docs){
 			     res.render('run_status', {
 				     "title" : "shox runs status",
-				         "runs" : docs
+				         "data" : docs
 					});
 			     });
     });
