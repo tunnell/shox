@@ -101,6 +101,7 @@ router.get('/processing_status', function(req, res) {
         var db = req.db;
         var collection = db.get('runs');
         collection.aggregate([
+                              {$match: {'tags.name': '_sciencerun1', 'detector': 'tpc'}},
                               {$addFields : {types : '$data.type'}},
                               {$project: {
                                       _id : 0,
