@@ -1,25 +1,22 @@
 doctype html
-html
+html(class="js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths")
   head
     meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    //meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     
     title= title
 
-    // Local
-    link(rel='stylesheet', href='/stylesheets/style.css')
-
     // icons
-    link(rel="apple-touch-icon", sizes="180x180", href="/images/apple-touch-icon.png")
-    link(rel="icon", type="image/png", sizes="32x32", href="/images/favicon-32x32.png")
-    link(rel="icon", type="image/png", sizes="16x16", href="/images/favicon-16x16.png")
-    link(rel="manifest", href="/images/site.webmanifest")
-    link(rel="mask-icon", href="/images/safari-pinned-tab.svg", color="#5bbad5")
-    link(rel="shortcut icon", href="/images/favicon.ico")
+    link(rel="apple-touch-icon", sizes="180x180", href="/images/favicon/apple-touch-icon.png")
+    link(rel="icon", type="image/png", sizes="32x32", href="/images/favicon/favicon-32x32.png")
+    link(rel="icon", type="image/png", sizes="16x16", href="/images/favicon/favicon-16x16.png")
+    link(rel="manifest", href="/images/favicon/site.webmanifest")
+    link(rel="mask-icon", href="/images/favicon/safari-pinned-tab.svg", color="#5bbad5")
+    link(rel="shortcut icon", href="/images/favicon/favicon.ico")
     meta(name="msapplication-TileColor", content="#00aba9")
-    meta(name="msapplication-TileImage", content="/images/mstile-144x144.png")
-    meta(name="msapplication-config", content="/images/browserconfig.xml")
+    meta(name="msapplication-TileImage", content="/images/favicon/mstile-144x144.png")
+    meta(name="msapplication-config", content="/images/favicon/browserconfig.xml")
     meta(name="theme-color", content="#ffffff")
 
     //  https://datatables.net/download/                              
@@ -28,6 +25,14 @@ html
     script(type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js")
     script(type="text/javascript", src="https://cdn.datatables.net/v/zf/jq-3.3.1/jszip-2.5.0/dt-1.10.18/b-1.5.2/b-html5-1.5.2/sl-1.2.6/datatables.min.js")
 
+    // Responsive sidebar https://codyhouse.co/gem/responsive-sidebar-navigation
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700')
+    link(rel='stylesheet', href='stylesheets/reset.css')   
+    link(rel='stylesheet', href='stylesheets/style.css')
+    script(type="text/javascript", src="javascripts/sidebar.js")
+    script(type="text/javascript", src="https://codyhouse.co/demo/responsive-sidebar-navigation/js/jquery.menu-aim.js")
+    script(type="text/javascript", src="https://codyhouse.co/demo/responsive-sidebar-navigation/js/modernizr.js")
+
     // moment
     script(src='https://momentjs.com/downloads/moment.min.js')
 
@@ -35,26 +40,68 @@ html
     script(src="https://code.highcharts.com/highcharts.js")
     script(src="https://code.highcharts.com/modules/exporting.js")
     script(src="https://code.highcharts.com/modules/export-data.js")
-    
+
+    // font awesome
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.3.1/css/all.css', integrity='sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU', crossorigin='anonymous')
+
     
   body
-    div.sidebar      
-      img(src="/images/shox.png" alt="shox logo" width=110 height=150)
-      a.sidebar-item#lindex(href='/') Overview
-      br
-      a.sidebar-item#lruns(href='/run_status') Runs
-      br
-      a.sidebar-item#lprocessing(href='/processing_status') Progress
-      br
-      a.sidebar-item#lqueue(href='/processing_queue') Job queue
-      br
-      a.sidebar-item#lworkers(href='/workers') Workers
-      br
-      a.sidebar-item#ldatasize(href='/data_size') Data size
-      br
-      br
-      p Author: #[a(href="mailto:tunnell@rice.edu") tunnell@rice.edu]
-      p #[a(href="https://github.com/tunnell/shox") Github]
     
-    div.main-container
-      block content
+
+    header.cd-main-header
+      a.cd-logo(href='#0')
+        img(src='/images/shox_transparent_notext.png' alt='Logo' width=50 height=50)
+
+      a.cd-nav-trigger(href='#0')
+        | Menu
+        span
+      nav.cd-nav
+        ul.cd-top-nav
+          li
+            a(href='https://www.tanzaniaonline.nl') Tour
+          li
+            a(href='http://gitter.im/xenon1t/computing') Support
+          li.has-children.account
+            a(href='#0')
+              img(src='/images/cd-avatar.png', alt='avatar')
+              |                Account
+            ul
+              li
+                a(href='#0') My Account
+
+
+    main.cd-main-content
+      nav.cd-side-nav
+        ul
+          li.cd-label Main
+          li.has-children.overview.active
+            a(href='/') Overview
+            ul
+              li
+                a(href='/processing_status') Processing progress
+              li
+                a(href='/data_size') Data volume
+
+          li.has-children.notifications.active
+            a(href='#0') Detail
+            ul
+              li
+                a(href='/processing_queue') Work queue
+              li
+                a(href='/workers') Workers
+              li
+                a(href='/run_status') Run status
+      
+        a(href='https://github.com/tunnell/shox')
+          img(src="images/social-1_logo-github.svg") 
+        a(href='mailto:tunnell@rice.edu')
+          img(src="images/email-84.svg") 
+          
+
+      .content-wrapper
+        block content
+
+
+    
+    //div.main-container
+      //block content
