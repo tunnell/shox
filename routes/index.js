@@ -23,7 +23,6 @@ router.get('/data_size', function(req, res) {
                               ],
                              {},
                              function(e, docs){
-                                 console.log(docs);
                                  res.render('data_size', {
                                          "title" : "shox data size",
                                              "docs" : JSON.stringify(docs),
@@ -47,7 +46,13 @@ router.get('/workers', function(req, res) {
                              });
     });
 
-router.get('/processing_queue', function(req, res) {
+router.get('/processing_queue',
+   function(req, res) {   
+               res.render('processing_queue', {                                     
+                    "title" : "shox processing queue status"
+                        });});
+
+router.get('/processing_queue_table', function(req, res) {
         var db = req.db;
         var collection = db.get('processing_queue');
         collection.aggregate([
@@ -56,12 +61,13 @@ router.get('/processing_queue', function(req, res) {
                               ],
                              {},
                              function(e,docs){
-                                 res.render('processing_queue', {
-                                         "title" : "shox processing queue status",
-                                             "runs" : docs
-                                             });
+                                 console.log({"data" : docs});
+                                 res.send({"data" : docs});
+
                              });
     });
+
+
 
 router.get('/run_status', function(req, res) {
         var db = req.db;

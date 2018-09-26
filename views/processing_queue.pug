@@ -6,19 +6,8 @@ block content
       
     .container
         table#pickle.display
-            thead
-                tr
-                    th Run number
-                    th Priority
-                    th createdOn
-                    th startTime
-            tbody
-                each run, i in runs
-                  tr
-                    td(scope='row')= run.payload.number
-                    td= run.priority
-                    td= run.createdOn
-                    td= run.startTime
+          thead
+
 
     script(src='/javascripts/queuetable.js')
 
